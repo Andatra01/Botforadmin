@@ -8,7 +8,7 @@ bot = telebot.TeleBot(config.TOKEN)
 
 
 
-@bot.message_handler(commands=['foradmin'])
+@bot.message_handler(commands=['start'])
 def welcome(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
     button1 = types.KeyboardButton('Проблемы с принтером')
@@ -48,7 +48,7 @@ def question_printer(message):
     stic = open('static/FireRUN.tgs', 'rb')
     stice = open('static/FireNote.tgs', 'rb')
     sticer = open('static/FireZLO.tgs', 'rb')
-
+    plak = open('static/Plak.tgs', 'rb')
 
     if msg == 'Проблемы с принтером':
         bot.send_message(message.chat.id, 'Подскажите какая проблема у вас с принтером?'.format(message.from_user, bot.get_me()),
@@ -100,9 +100,19 @@ def question_printer(message):
 
     elif msg == 'Виснет YouTube, Фильмы для детей':
         bot.send_sticker(message.chat.id, sticer)
-        bot.send_message(message.chat.id,"Инструкция:\n 1)Не переживайте, данная проблема тоже решается очень просто\n2)Просто перезагрузите ваш браузер\n3) Если не помогло переподключите интернет провод")
+        bot.send_message(message.chat.id,"Инструкция:\n 1)Не переживайте, данная проблема тоже решается очень просто!\n2)Просто перезагрузите ваш браузер\n3) Если не помогло переподключите интернет провод")
         bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('photo_printer/16.jpg', 'rb')), telebot.types.InputMediaPhoto(open('photo_printer/17.jpg', 'rb'))])
 # Функция для появления ошибок Кассы
+    else:
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+        button1 = types.KeyboardButton('Проблемы с принтером')
+        button2 = types.KeyboardButton('Проблемы с кассой')
+        button3 = types.KeyboardButton('Проблемы с интернетом')
+        markup.add(button1, button2, button3)
+        sti = open('static/welcome.tgs', 'rb')
+        bot.send_sticker(message.chat.id, plak)
 
-# RUN
+        bot.send_message(message.chat.id, "Я еще глуповат и не понимаю вас, напишите системеному администратору.".format(message.from_user, bot.get_me()),
+                            parse_mode='html', reply_markup=markup)
+
 bot.polling(none_stop=True, timeout=123)
