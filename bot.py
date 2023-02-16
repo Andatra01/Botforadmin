@@ -22,6 +22,14 @@ def welcome(message):
             parse_mode='html', reply_markup=markup)
 
 
+@bot.message_handler(commands=['music'])
+def music(message):
+    markup=types.InlineKeyboardMarkup()
+    markup.add(types.InlineKeyboardButton("Посетить сайт", url="https://www.radiorecord.ru/"))
+    bot.send_message(message.chat.id, "Актуальныя информация на сайте, просто нажми на кнопку", parse_mode='html', reply_markup=markup)
+
+
+
 @bot.message_handler(commands=['website'])
 def open_problem(message):
     markup=types.InlineKeyboardMarkup()
@@ -48,7 +56,7 @@ def question_printer(message):
     stic = open('static/FireRUN.tgs', 'rb')
     stice = open('static/FireNote.tgs', 'rb')
     sticer = open('static/FireZLO.tgs', 'rb')
-    plak = open('static/Plak.tgs', 'rb')
+    plak = open('static/plak.tgs', 'rb')
 
     if msg == 'Проблемы с принтером':
         bot.send_message(message.chat.id, 'Подскажите какая проблема у вас с принтером?'.format(message.from_user, bot.get_me()),
@@ -67,7 +75,7 @@ def question_printer(message):
         bot.send_message(message.chat.id,"Для начала не стоит паниковать.Проверьте, стоит ли ваш принтер в приоритете.Просто следуйте следующей инструкции:")
         bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('photo_printer/1.jpg', 'rb')), telebot.types.InputMediaPhoto(open('photo_printer/2.jpg', 'rb')),
                                                telebot.types.InputMediaPhoto(open('photo_printer/3.jpg', 'rb')),telebot.types.InputMediaPhoto(open('photo_printer/6.jpg', 'rb'))])
-
+#fdsf
     elif msg == 'Проблемы с кассой':
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
         button1 = types.KeyboardButton('Не печатает чек')
@@ -100,7 +108,7 @@ def question_printer(message):
 
     elif msg == 'Виснет YouTube, Фильмы для детей':
         bot.send_sticker(message.chat.id, sticer)
-        bot.send_message(message.chat.id,"Инструкция:\n 1)Не переживайте, данная проблема тоже решается очень просто!\n2)Просто перезагрузите ваш браузер\n3) Если не помогло переподключите интернет провод")
+        bot.send_message(message.chat.id,"Инструкция:\n 1)Не переживайте, данная проблема тоже решается очень просто!\n2)Просто перезагрузите ваш браузер\n3) Если не помогло переподключите интернет провод и пере компьютер")
         bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('photo_printer/16.jpg', 'rb')), telebot.types.InputMediaPhoto(open('photo_printer/17.jpg', 'rb'))])
 # Функция для появления ошибок Кассы
     else:
